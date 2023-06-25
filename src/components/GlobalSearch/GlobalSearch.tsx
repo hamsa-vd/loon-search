@@ -63,7 +63,7 @@ function GlobalSearch() {
         <FontAwesomeIcon icon={faSearch} />
       </div>
       {
-        identifiedIntents.length && 
+        identifiedIntents.length !== 0 && 
         <div className='intents'>
             {identifiedIntents.map(intent => <IntentTile key={intent} name={intent} otherIntents={getOtherIntents()} />)}
         </div>
