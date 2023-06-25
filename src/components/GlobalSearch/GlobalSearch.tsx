@@ -42,11 +42,11 @@ function GlobalSearch() {
   
   // Ref to reduce re-renders
   let {current: search} = useRef("")
-  const [identifiedIntents, setIdentifiedIntents] = useState(INTENTS.slice(0, 3))
+  const [identifiedIntents, setIdentifiedIntents] = useState<string[]>([])
 
   // when enter is pressed
   const updateSearch = () => {
-    console.log(search)
+    setIdentifiedIntents(INTENTS.slice(0, 3))
   }
 
   const getOtherIntents = useCallback(() => INTENTS.filter(i => !identifiedIntents.includes(i)) , [identifiedIntents])
@@ -62,9 +62,12 @@ function GlobalSearch() {
         />
         <FontAwesomeIcon icon={faSearch} />
       </div>
-      <div className='intents'>
-          {identifiedIntents.map(intent => <IntentTile key={intent} name={intent} otherIntents={getOtherIntents()} />)}
-      </div>
+      {
+        identifiedIntents.length && 
+        <div className='intents'>
+            {identifiedIntents.map(intent => <IntentTile key={intent} name={intent} otherIntents={getOtherIntents()} />)}
+        </div>
+      }
     </div>
   )
 }
